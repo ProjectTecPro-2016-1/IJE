@@ -1,21 +1,17 @@
-/*
- * Classe que representa uma camera.
- *
- * Autor: Edson Alves
- * Data: 27/05/2015
- * Licença: LGPL. Sem copyright.
- */
+// Class that represents a camera
+// Author: Edson Alves
+// Date: 27/05/2015
+// Licence: LGPL. Sem copyright
+
 #ifndef CAMERA_H
 #define CAMERA_H
 
 #include "core/object.h"
-
 #include <memory>
 
 using std::unique_ptr;
 
-class Camera : public Object
-{
+class Camera : public Object {
 public:
     typedef enum { STATIC, FOLLOWING } Mode;
 
@@ -26,7 +22,7 @@ public:
     Mode mode() const;
     void set_mode(Mode mode);
 
-    void follow(const Object* object);
+    void follow(const Object * object);
 
     void set_limits(const Rect& limits);
 
