@@ -1,12 +1,9 @@
-/*
- * Implementação da classe Animation.
- *
- * Autor: Edson Alves
- * Data: 05/05/2015
- * Licença: LGPL. Sem copyright.
- */
-#include "core/animation.h"
+// Class implementation Animation
+// Author: Edson Alves
+// Date: 05/05/2015
+// Licence: LGPL. Sem copyright
 
+#include "core/animation.h"
 #include "core/rect.h"
 #include "core/texture.h"
 #include "core/environment.h"
@@ -49,6 +46,8 @@ bool Animation::is_done() const {
 void Animation::update(unsigned long elapsed) {
     if (not m_impl->last) {
         m_impl->last = elapsed;
+    } else {
+        // Nothing to do
     }
 
     if (elapsed - m_impl->last > m_impl->speed) {
@@ -60,13 +59,19 @@ void Animation::update(unsigned long elapsed) {
         } else if (m_impl->frame == m_impl->frames) {
             --m_impl->frame;
             m_impl->done = true;
+        } else {
+            // Nothing to do
         }
+    } else {
+        // Nothing to do
     }
 }
 
 void Animation::draw(double x, double y) {
     if (m_impl->done) {
         return;
+    } else {
+        // Nothing to do
     }
 
     Rect clip { m_impl->x + m_impl->frame * m_impl->w, m_impl->y, m_impl->w,
@@ -90,6 +95,8 @@ void Animation::set_row(int row) {
 
     if (m_impl->y != y) {
         m_impl->frame = 0;
+    } else {
+        // Nothing to do
     }
 
     m_impl->y = y;
