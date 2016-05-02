@@ -1,17 +1,14 @@
-/*
- * Classe que representa um círculo no espaço bidimensional.
- *
- * Autor: Edson Alves
- * Data: 13/04/2015
- * Licença: LGPL. Sem copyright.
- */
+// Class that represents a circle in two-dimensional space
+// Author: Edson Alves
+// Date: 13/04/2015
+// Licence: LGPL. Sem copyright
+
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
 #include "point.h"
 
-class Circle
-{
+class Circle {
 public:
     Circle(const Point& center = Point(), double radius = 0);
 
