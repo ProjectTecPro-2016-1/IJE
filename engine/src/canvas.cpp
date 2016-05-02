@@ -1,10 +1,8 @@
-/*
- * Implementação da classe que representa a área da janela a ser desenhada.
- *
- * Autor: Edson Alves
- * Data: 13/04/2015
- * Licença: LGPL. Sem copyright.
- */
+// Implementation of the class that represents the area of the window to be drawn
+// Author: Edson Alves
+// Date: 13/04/2015
+// Licence: LGPL. Sem copyright
+
 #include "core/canvas.h"
 #include "core/point.h"
 #include "core/line.h"
@@ -15,7 +13,7 @@
 #include "core/bitmap.h"
 #include "core/environment.h"
 
-Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
+Canvas::Canvas(SDL_Renderer * renderer, int w, int h)
     : m_renderer(renderer), m_w(w), m_h(h), m_blend_mode(NONE) {
     set_color(Color::WHITE);
     m_bitmap = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
@@ -58,10 +56,14 @@ void Canvas::set_color(const Color& color) {
 void Canvas::set_resolution(int w, int h) {
     if (m_bitmap) {
         SDL_FreeSurface(m_bitmap);
+    } else {
+        // Nothing to do
     }
 
     if (m_texture) {
         SDL_DestroyTexture(m_texture);
+    } else {
+        // Nothing to do
     }
 
     m_bitmap = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
@@ -85,6 +87,9 @@ void Canvas::set_blend_mode(BlendMode mode) {
     case BLEND:
         SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND);
         break;
+
+    default:
+        // Nothing to do
     }
 
     m_blend_mode = mode;
@@ -93,6 +98,8 @@ void Canvas::set_blend_mode(BlendMode mode) {
 void Canvas::clear(const Color& color) {
     if (color != m_color) {
         set_color(color);
+    } else {
+        // Nothing to do
     }
 
     SDL_RenderClear(m_renderer);
@@ -113,6 +120,8 @@ void Canvas::draw(const Point& point) const {
 void Canvas::draw(const Point& point, const Color& color) {
     if (color != m_color) {
         set_color(color);
+    } else {
+        // Nothing to do
     }
 
     draw(point);
@@ -131,6 +140,8 @@ void Canvas::draw(const Line& line) const {
 void Canvas::draw(const Line& line, const Color& color) {
     if (color != m_color) {
         set_color(color);
+    } else {
+        // Nothing to do
     }
 
     draw(line);
@@ -153,6 +164,8 @@ void Canvas::draw(const Rect& rect) const {
 void Canvas::draw(const Rect& rect, const Color& color) {
     if (color != m_color) {
         set_color(color);
+    } else {
+        // Nothing to do
     }
 
     draw(rect);
@@ -174,6 +187,8 @@ void Canvas::fill(const Rect& rect) const
 void Canvas::fill(const Rect& rect, const Color& color) {
     if (color != m_color) {
         set_color(color);
+    } else {
+        // Nothing to do
     }
 
     fill(rect);
@@ -230,6 +245,8 @@ void Canvas::fill(const Circle& circle) const {
 void Canvas::fill(const Circle& circle, const Color& color) {
     if (color != m_color) {
         set_color(color);
+    } else {
+        // Nothing to do
     }
 
     fill(circle);
@@ -239,6 +256,8 @@ void Canvas::fill(const Circle& circle, const Color& color) {
 void Canvas::draw(const Circle& circle, const Color& color) {
     if (color != m_color) {
         set_color(color);
+    } else {
+        // Nothing to do
     }
 
     draw(circle);
@@ -264,6 +283,8 @@ void Canvas::fill_circle_points(int cx, int cy, int x, int y) const {
 void Canvas::draw(const Texture *texture, double x, double y, double w, double h) const {
     if (not texture) {
         return;
+    } else {
+        // Nothing to do
     }
 
     Rect clip { 0, 0, (double) texture->size().first, (double) texture->size().second };
@@ -299,6 +320,8 @@ SDL_Renderer * Canvas::renderer() const {
 void Canvas::draw(const string& text, double x, double y, const Color& color) const {
     if (not m_font.get()) {
         return;
+    } else {
+        // Nothing to do
     }
 
     SDL_Color text_color { color.r(), color.g(), color.b(), color.a() };
@@ -308,6 +331,8 @@ void Canvas::draw(const string& text, double x, double y, const Color& color) co
 
     if (not surface) {
         return;
+    } else {
+        // Nothing to do
     }
 
     int w = surface->w;
@@ -318,6 +343,8 @@ void Canvas::draw(const string& text, double x, double y, const Color& color) co
 
     if (not texture) {
         return;
+    } else {
+        // Nothing to do
     }
 
     Environment * env = Environment::get_instance();
@@ -335,6 +362,8 @@ void Canvas::draw(const string& text, double x, double y, const Color& color) co
 Texture * Canvas::render_text(const string& text, const Color& color) {
     if (not m_font.get()) {
         return nullptr;
+    } else {
+        // Nothing to do
     }
 
     SDL_Color text_color { color.r(), color.g(), color.b(), color.a() };
@@ -343,6 +372,8 @@ Texture * Canvas::render_text(const string& text, const Color& color) {
 
     if (not surface) {
         return nullptr;
+    } else {
+        // Nothing to do
     }
 
     int w = surface->w;
@@ -353,10 +384,14 @@ Texture * Canvas::render_text(const string& text, const Color& color) {
 
     if (not texture) {
         return nullptr;
+    } else {
+        // Nothing to do
     }
 
     if (color.a() != 255) {
         SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+    } else {
+        // Nothing to do
     }
 
     return new Texture(texture, w, h);
