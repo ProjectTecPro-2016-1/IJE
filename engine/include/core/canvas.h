@@ -1,16 +1,13 @@
-/*
- * Classe que representa a área da janela a ser desenhada.
- *
- * Autor: Edson Alves
- * Data: 13/04/2015
- * Licença: LGPL. Sem copyright.
- */
+// Class which represents the area of ​​the window to be drawn
+// Author: Edson Alves
+// Date: 13/04/2015
+// Licence: LGPL. Sem copyright
+
 #ifndef CANVAS_H
 #define CANVAS_H
 
 #include <SDL2/SDL.h>
 #include <memory>
-
 #include "exception.h"
 #include "color.h"
 
@@ -25,8 +22,8 @@ class Texture;
 class Font;
 class Bitmap;
 
-class Canvas
-{
+class Canvas{
+
 public:
     typedef enum { NONE, BLEND } BlendMode;
 
@@ -59,8 +56,8 @@ public:
     void draw(const Circle& circle) const;
     void draw(const Circle& circle, const Color& color);
 
-    void draw(const Texture *texture, double x = 0, double y = 0, double w = 0, double h = 0) const;
-    void draw(const Texture *texture, Rect clip, double x = 0,
+    void draw(const Texture * texture, double x = 0, double y = 0, double w = 0, double h = 0) const;
+    void draw(const Texture * texture, Rect clip, double x = 0,
         double y = 0, double w = 0, double h = 0) const;
 
     void draw(const string& text, double x = 0, double y = 0,
@@ -81,13 +78,13 @@ public:
     void update_bitmap();
 
 private:
-    SDL_Renderer *m_renderer;
+    SDL_Renderer * m_renderer;
     int m_w, m_h;
     Color m_color;
     shared_ptr<Font> m_font;
     BlendMode m_blend_mode;
-    SDL_Surface *m_bitmap;
-    SDL_Texture *m_texture;
+    SDL_Surface * m_bitmap;
+    SDL_Texture * m_texture;
 
     void draw_circle_points(int cx, int cy, int x, int y) const;
     void fill_circle_points(int cx, int cy, int x, int y) const;
