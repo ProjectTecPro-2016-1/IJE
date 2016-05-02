@@ -1,10 +1,8 @@
-/*
- * Implementação da classe Button.
- *
- * Autor: Edson Alves
- * Data: 29/04/2015
- * Licença: LGPL. Sem copyright.
- */
+ // Class implementation Button
+ // Author: Edson Alves
+ // Date: 29/04/2015
+ // Licence: LGPL. Sem copyright
+
 #include "core/color.h"
 #include "core/rect.h"
 #include "core/text.h"
@@ -13,7 +11,6 @@
 #include "core/environment.h"
 #include "core/mousebuttonevent.h"
 #include "core/mousemotionevent.h"
-
 #include <cstdio>
 
 class Button::Impl {
@@ -49,6 +46,8 @@ public:
         if (text.size() > 0) {
             delete m_text;
             m_text = new Text(m_button, text, color);
+        } else {
+            // Nothing to do
         }
     }
 
@@ -71,6 +70,8 @@ public:
             m_button->notify(clickedID, coords);
 
             return true;
+        } else {
+            // Nothing to do
         }
 
         return false;
@@ -82,6 +83,8 @@ public:
 
             if (m_active_texture.get()) {
                 m_button->set_dimensions(m_active_texture->w(), m_active_texture->h());
+            } else {
+                // Nothing to do
             }
 
             return true;
@@ -90,6 +93,8 @@ public:
 
             if (m_idle_texture.get()) {
                 m_button->set_dimensions(m_idle_texture->w(), m_idle_texture->h());
+            } else {
+                // Nothing to do
             }
         }
 
@@ -111,6 +116,9 @@ public:
             image = m_active_texture;
             color = m_active;
             break;
+
+        default:
+            // Nothing to do
         }
 
         if (image.get()) {
@@ -134,6 +142,8 @@ public:
         if (m_text) {
             m_text->align_to(m_button, Object::CENTER, Object::MIDDLE);
             m_text->draw();
+        } else {
+            // Nothing to do
         }
     }
 
