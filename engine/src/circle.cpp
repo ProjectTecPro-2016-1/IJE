@@ -1,10 +1,8 @@
-/*
- * Implementação da classe que representa um círculo no espaço bidimensional.
- *
- * Autor: Edson Alves
- * Data: 13/04/2015
- * Licença: LGPL. Sem copyright.
- */
+// Implementation of the class that represents a circle in two-dimensional space
+// Author: Edson Alves
+// Date: 13/04/2015
+// Licence: LGPL. Sem copyright
+
 #include "core/circle.h"
 
 Circle::Circle(const Point& center, double radius)
