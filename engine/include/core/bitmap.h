@@ -1,10 +1,9 @@
-/*
- * Classe que representa um mapa de bits.
- *
- * Autor: Rodrigo Gonçalves
- * Data: 18/05/2015
- * Licença: LGPL. Sem copyright.
- */
+
+ // Class representing a bitmap
+ // Author: Rodrigo Gonçalves
+ // Date: 18/05/2015
+ // Licence: LGPL. Sem copyright
+
  #ifndef BITMAP_H
  #define BITMAP_H
 
@@ -17,11 +16,11 @@
 using std::string;
 using std::unique_ptr;
 
-class Bitmap
-{
+class Bitmap {
+
 public:
-    Bitmap(void *data, int w, int h);
-    Bitmap(Canvas *canvas);
+    Bitmap(void * data, int w, int h);
+    Bitmap(Canvas * canvas);
     ~Bitmap();
 
     int w() const;
@@ -30,8 +29,8 @@ public:
     void * pixels() const;
     void clear();
 
-    Uint32 getpixel(SDL_Surface *surface, int x, int y);
-    void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
+    Uint32 getpixel(SDL_Surface * surface, int x, int y);
+    void putpixel(SDL_Surface * surface, int x, int y, Uint32 pixel);
 
     static Bitmap * from_file(const string& path) throw (Exception);
 
