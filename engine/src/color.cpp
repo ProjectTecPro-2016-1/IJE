@@ -1,10 +1,8 @@
-/*
- * Implementação da classe que representa uma cor.
- *
- * Autor: Edson Alves
- * Data: 13/04/2015
- * Licença: LGPL. Sem copyright.
- */
+// Implementation of a class that represents a color
+// Author: Edson Alves
+// Date: 13/04/2015
+// Licence: LGPL. Sem copyright
+
 #include "core/color.h"
 
 Color::Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
