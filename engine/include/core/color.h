@@ -1,15 +1,12 @@
-/*
- * Classe que representa uma cor.
- *
- * Autor: Edson Alves
- * Data: 13/04/2015
- * Licença: LGPL. Sem copyright.
- */
+// Class that represents a color
+// Author: Edson Alves
+// Date: 13/04/2015
+// Licence: LGPL. Sem copyright
+
 #ifndef COLOR_H
 #define COLOR_H
 
-class Color
-{
+class Color {
 public:
     Color(unsigned char r = 0, unsigned char g = 0, unsigned char b = 0, unsigned char a = 255);
 
