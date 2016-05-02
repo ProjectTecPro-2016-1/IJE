@@ -1,10 +1,8 @@
-/*
- * Implementação da classe AudioManagerWrapper.
- *
- * Autor: Caio Nardelli
- * Data: 18/05/2015
- * Licença: LGPL. Sem copyright.
- */
+ // Class implementation AudioManagerWrapper
+ // Autor: Caio Nardelli
+ // Data: 18/05/2015
+ // Licença: LGPL. Sem copyright
+
 #include "core/audiomanagerwrapper.h"
 #include <iostream>
 #include <SDL2/SDL.h>
@@ -29,12 +27,16 @@ void AudioManagerWrapper::init() throw (Exception) {
 
     if (not sfx_manager) {
         throw Exception("Out of memory for a new AudioManagerSfx");
+    } else {
+        // Nothing to do
     }
 
     music_manager = new AudioManagerMusic();
 
     if (not music_manager) {
         throw Exception("Out of memory for a new AudioManagerMusic");
+    } else {
+        // Nothing to do
     }
 }
 
@@ -66,6 +68,8 @@ void AudioManagerWrapper::close_audio() {
 
         // Set the amount of times to close the audio to one, just for safety.
         times_to_close = 1;
+    } else {
+        // Nothing to do
     }
 
     // Close the audio the necessary amount of times.
