@@ -1,10 +1,8 @@
-/*
- * Implementação da classe que representa um mapa de bits.
- *
- * Autor: Rodrigo Gonçalves
- * Data: 13/05/2015
- * Licença: LGPL. Sem copyright.
- */
+// Implementation of class representation que um bitmap
+// Author: Rodrigo Gonçalves
+// Date: 13/05/2015
+// Licence: LGPL. Sem copyright
+
 #include "core/bitmap.h"
 #include "core/rect.h"
 #include "core/exception.h"
@@ -23,6 +21,8 @@ public:
     ~Impl() {
         if (m_bitmap) {
             SDL_FreeSurface(m_bitmap);
+        } else {
+            // Nothing to do
         }
     }
 
@@ -32,12 +32,15 @@ public:
     int h() const {
         return m_h;
     }
+
     SDL_Surface * data() const {
         return m_bitmap;
     }
+
     void * pixels() const {
         return m_bitmap->pixels;
     }
+
     void clear() {
         SDL_FillRect(m_bitmap, nullptr, 0);
     }
@@ -83,12 +86,18 @@ Bitmap * Bitmap::from_file(const string& path) throw (Exception) {
 
     if (bitmap == nullptr) {
         throw Exception(SDL_GetError());
+    } else {
+            // Nothing to do
+        }
     }
 
     Bitmap * b = new Bitmap(bitmap, bitmap->w, bitmap->h);
 
     if (not b) {
         throw Exception("Out of memory for a new Bitmap");
+    } else {
+            // Nothing to do
+        }
     }
 
     return b;
@@ -118,8 +127,7 @@ Uint32 Bitmap::getpixel(SDL_Surface *surface, int x, int y) {
     case 3:
         if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
             return p[0] << 16 | p[1] << 8 | p[2];
-        }
-        else {
+        } else {
             return p[0] | p[1] << 8 | p[2] << 16;
         }
         break;
@@ -162,6 +170,10 @@ Bitmap::putpixel(SDL_Surface * surface, int x, int y, Uint32 pixel) {
     case 4:
         * (Uint32 *)p = pixel;
         break;
+
+    default:
+        // Nothing to do
+
     }
 }
 
