@@ -1,10 +1,8 @@
-/*
- * Implementação da classe AudioManager.
- *
- * Autor: Caio Nardelli
- * Data: 17/05/2015
- * Licença: LGPL. Sem copyright.
- */
+ Class implementation AudioManager
+ Author: Caio Nardelli
+ Date: 17/05/2015
+ Licence: LGPL. Sem copyright
+
 #include <cassert>
 #include <iostream>
 #include <SDL2/SDL_mixer.h>
@@ -39,6 +37,8 @@ template <> void AudioManager<AudioType::Music>::play(const string& path, const 
     const auto k_played_music = (Mix_PlayMusic(music->mix_music(), times) == 0);
     if (not k_played_music) {
         cout << "Couldn't play music (" << path << "). " << Mix_GetError() << endl;
+    } else {
+        // Nothing to do
     }
 }
 
@@ -70,6 +70,8 @@ template <> void AudioManager<AudioType::Music>::fade_out(const double seconds) 
     const auto k_faded = (Mix_FadeOutMusic(k_milliseconds) == 1);
     if (not k_faded) {
         cout << "Could not fade music. Probably no music playing/already faded." << endl;
+    } else {
+        // Nothing to do
     }
 }
 
@@ -99,13 +101,15 @@ template <> void AudioManager<AudioType::SoundEffect>::play(const string& path, 
     if (k_played_channel == -1) {
         cout << "Failed to play sound effect for any channel (" << k_played_channel <<
             "). " << Mix_GetError() << endl;
+    } else {
+        // Nothing to do
     }
 }
 
 template <> void AudioManager<AudioType::SoundEffect>::set_volume(const int percent) {
-    /// @todo Decide whether the <= 100 assertion is necessary.
+    /// @todo Decide whether the <= 100 assertion is necessary
     // No need to check for percent being above 100, SDL_Mixer already caps the volume to
-    // MIX_MAX_VOLUME.
+    // MIX_MAX_VOLUME
     assert(percent >= 0   && "Must be >= 0");
     assert(percent <= 100 && "Must be <= 100");
 
