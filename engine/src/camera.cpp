@@ -1,10 +1,8 @@
-/*
- * Implementação da classe Camera.
- *
- * Autor: Edson Alves
- * Data: 27/05/2015
- * Licença: LGPL. Sem copyright.
- */
+// Class implementation Camera
+// Author: Edson Alves
+// Date: 27/05/2015
+// Licence: LGPL. Sem copyright
+
 #include "core/camera.h"
 #include "core/rect.h"
 #include <iostream>
@@ -37,21 +35,31 @@ public:
 
             if (x < m_limits.x()) {
                 x = m_limits.x();
+            } else {
+                // Nothing to do
             }
 
             if (x + m_camera->w() > m_limits.x() + m_limits.w()) {
                 x = m_limits.x() + m_limits.w() - m_camera->w();
+            } else {
+                // Nothing to do
             }
 
             if (y < m_limits.y()) {
                 y = m_limits.y();
+            } else {
+                // Nothing to do
             }
 
             if (y + m_camera->h() > m_limits.y() + m_limits.h()) {
                 y = m_limits.y() + m_limits.h() - m_camera->h();
+            } else {
+                // Nothing to do
             }
 
             m_camera->set_position(x, y);
+        } else {
+            // Nothing to do
         }
     }
 
