@@ -1,10 +1,8 @@
-/*
- * Classe que representa uma animação.
- *
- * Autor: Edson Alves
- * Data: 05/05/2015
- * Licença: LGPL. Sem copyright.
- */
+ // Class which represents an animation
+ // Author: Edson Alves
+ // Date: 05/05/2015
+ // Licence: LGPL. Sem copyright
+
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
@@ -14,9 +12,7 @@
 using std::string;
 using std::unique_ptr;
 
-
-class Animation
-{
+class Animation {
 public:
     Animation(const string& image, double x, double y, double w, double h,
         int frames, unsigned long speed_in_ms, bool loop = false);
