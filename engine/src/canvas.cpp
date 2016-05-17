@@ -90,6 +90,7 @@ void Canvas::set_blend_mode(BlendMode mode) {
 
     default:
         // Nothing to do
+        break;
     }
 
     m_blend_mode = mode;

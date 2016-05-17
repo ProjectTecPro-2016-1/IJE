@@ -119,6 +119,7 @@ public:
 
         default:
             // Nothing to do
+            break;
         }
 
         if (image.get()) {

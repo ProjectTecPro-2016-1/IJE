@@ -1,8 +1,3 @@
-// Implementation of class representation que um bitmap
-// Author: Rodrigo Gonçalves
-// Date: 13/05/2015
-// Licence: LGPL. Sem copyright
-
 #include "core/bitmap.h"
 #include "core/rect.h"
 #include "core/exception.h"
@@ -13,8 +8,7 @@
 
 class Bitmap::Impl {
 public:
-    Impl(void *data, int w, int h)
-        : m_w(w), m_h(h) {
+    Impl(void *data, int w, int h) : m_w(w), m_h(h) {
         m_bitmap = static_cast<SDL_Surface *>(data);
     }
 
@@ -57,12 +51,10 @@ private:
     SDL_Surface * m_bitmap;
 };
 
-Bitmap::Bitmap(void * data, int w, int h)
-    : m_impl(new Impl(data, w, h)) {
+Bitmap::Bitmap(void * data, int w, int h) : m_impl(new Impl(data, w, h)) {
 }
 
-Bitmap::Bitmap(Canvas * canvas)
-    : m_impl(new Impl((void *) SDL_CreateRGBSurface(0, canvas->w(), canvas->h(), 32, 0, 0, 0, 0),
+Bitmap::Bitmap(Canvas * canvas) : m_impl(new Impl((void *) SDL_CreateRGBSurface(0, canvas->w(), canvas->h(), 32, 0, 0, 0, 0),
         canvas->w(), canvas->h())) {
 }
 
@@ -88,7 +80,6 @@ Bitmap * Bitmap::from_file(const string& path) throw (Exception) {
         throw Exception(SDL_GetError());
     } else {
             // Nothing to do
-        }
     }
 
     Bitmap * b = new Bitmap(bitmap, bitmap->w, bitmap->h);
@@ -97,7 +88,6 @@ Bitmap * Bitmap::from_file(const string& path) throw (Exception) {
         throw Exception("Out of memory for a new Bitmap");
     } else {
             // Nothing to do
-        }
     }
 
     return b;
@@ -141,8 +131,7 @@ Uint32 Bitmap::getpixel(SDL_Surface *surface, int x, int y) {
     }
 }
 
-void
-Bitmap::putpixel(SDL_Surface * surface, int x, int y, Uint32 pixel) {
+void Bitmap::putpixel(SDL_Surface * surface, int x, int y, Uint32 pixel) {
     int bpp = surface->format->BytesPerPixel;
     Uint8 * p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 
@@ -173,7 +162,7 @@ Bitmap::putpixel(SDL_Surface * surface, int x, int y, Uint32 pixel) {
 
     default:
         // Nothing to do
-
+        break;
     }
 }
 

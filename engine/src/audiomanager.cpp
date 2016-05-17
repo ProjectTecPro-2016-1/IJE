@@ -1,10 +1,6 @@
- Class implementation AudioManager
- Author: Caio Nardelli
- Date: 17/05/2015
- Licence: LGPL. Sem copyright
-
 #include <cassert>
 #include <iostream>
+
 #include <SDL2/SDL_mixer.h>
 #include "core/audiomanager.h"
 #include "core/music.h"
