@@ -1,10 +1,3 @@
-/*
- * Classe que representa um jogo.
- *
- * Autor: Edson Alves
- * Data: 26/03/2015
- * Licença: LGPL. Sem copyright.
- */
 #ifndef GAME_H
 #define GAME_H
 
@@ -20,8 +13,7 @@ class Environment;
 class SystemEvent;
 class KeyboardEvent;
 
-class Game : public Listener
-{
+class Game : public Listener {
 public:
     Game(const string& id);
     virtual ~Game();
