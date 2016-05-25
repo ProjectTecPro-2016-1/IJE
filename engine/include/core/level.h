@@ -19,8 +19,8 @@ public:
     void set_next(const string& next);
 
 private:
-    string m_next;
-    bool m_done;
+    string m_next;  // String to next level.
+    bool m_done;    // Boolean variable that indicates weather the level is finished or not.
 };
 
 #endif
