@@ -1,10 +1,3 @@
-/*
- * Classe que representa um nível no mundo do jogo.
- *
- * Autor: Edson Alves
- * Data: 20/04/2015
- * Licença: LGPL. Sem copyright.
- */
 #ifndef LEVEL_H
 #define LEVEL_H
 
@@ -15,8 +8,7 @@
 
 using std::string;
 
-class Level : public Object
-{
+class Level : public Object {
 public:
     Level(const string& id, const string& next = "");
 
