@@ -25,6 +25,8 @@ class Font::Impl {
         ~Impl() {
             if (m_font) {
                 TTF_CloseFont(m_font);
+            }else {
+                // Nothing to do
             }
         }
 
@@ -114,12 +116,16 @@ class Font::Impl {
         void change_size(int size) {
             if (m_size == size) {
                 return;
+            } else {
+                // Nothing to do
             }
 
             TTF_Font *font = TTF_OpenFont(m_path.c_str(), size);
 
             if (not font) {
                 return;
+            } else {
+                // Nothing to do
             }
 
             TTF_CloseFont(m_font);
@@ -161,6 +167,8 @@ Font * Font::from_file(const string& path) throw (Exception) {
 
     if (not font) {
         throw Exception(TTF_GetError());
+    } else {
+        // Nothing to do
     }
 
     return new Font(font, path);
@@ -213,4 +221,4 @@ void Font::set_size(int size) {
 // -------------------------------------------------------------   
 void Font::set_style(Style style) {
     m_impl->set_style(style);
-}
+}   
