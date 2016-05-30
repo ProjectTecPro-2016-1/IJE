@@ -64,7 +64,7 @@ class Font::Impl {
         // Function: set_size()  
         // Description: Set the font size.
         // Parameters:
-        //      int size;         Escrever aqui
+        //      int size;         Font size
         // Return: void
         // -------------------------------------------------------------   
         void set_size(int size) {
@@ -81,7 +81,7 @@ class Font::Impl {
         // Description: Set the font style.
         // Parameters:
         //      Style style;         Type of font, like bold, italic or
-        //                           normal.
+        //                           normal
         // Return: void
         // -------------------------------------------------------------   
         void set_style(Style style) {
@@ -110,7 +110,7 @@ class Font::Impl {
         // Function: change_size()  
         // Description: Change the font size.
         // Parameters:
-        //      int size;         Font size.
+        //      int size;         Font size
         // Return: void
         // -------------------------------------------------------------   
         void change_size(int size) {
@@ -216,7 +216,7 @@ void Font::set_size(int size) {
 // Function: set_style()  
 // Description: Set the font style.
 //      Style style;         Type of font, like bold, italic or
-//                           normal.    
+//                           normal
 // Return: void
 // -------------------------------------------------------------   
 void Font::set_style(Style style) {

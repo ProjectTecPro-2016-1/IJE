@@ -48,7 +48,8 @@ class EventsManager::Impl {
         // Function: register_listener()  
         // Description: Checks the status of listener and logs an event.
         // Parameters:
-        //      Listener *listener;     Escrever aqui
+        //      Listener *listener;     A listener that record actions
+        //                              from user.
         // Return: void
         // -------------------------------------------------------------  
         void register_listener(Listener *listener) {
@@ -63,7 +64,8 @@ class EventsManager::Impl {
         // Function: unregister_listener()  
         // Description: Checks the status of listener and remove an event. 
         // Parameters:
-        //      Listener *listener;     Escrever aqui
+        //      Listener *listener;     A listener that record actions
+        //                              from user.
         // Return: void
         // -------------------------------------------------------------  
         void unregister_listener(Listener *listener) {
@@ -72,7 +74,7 @@ class EventsManager::Impl {
 
         // -------------------------------------------------------------  
         // Function: dispatch_pending_events()
-        // Description: 
+        // Description: Treats pendinfg events from actions made by user.
         // Return: void
         // -------------------------------------------------------------  
         void dispatch_pending_events() {
@@ -171,7 +173,7 @@ class EventsManager::Impl {
 
 // -------------------------------------------------------------  
 // Function: EventsManager()
-// Description: 
+// Description: Implements de EventsManager.
 // -------------------------------------------------------------  
 EventsManager::EventsManager()
     : m_impl(new Impl()){
@@ -187,7 +189,7 @@ EventsManager::~EventsManager() {
 
 // -------------------------------------------------------------  
 // Function: dispatch_pending_events()  
-// Description: 
+// Description: Set the pending events.
 // Return: void
 // -------------------------------------------------------------  
 void EventsManager::dispatch_pending_events() {
@@ -196,9 +198,10 @@ void EventsManager::dispatch_pending_events() {
 
 // -------------------------------------------------------------  
 // Function: register_listener()  
-// Description: 
+// Description: Set the register listener.
 // Parameters:
-//      Listener *listener;     Escrever aqui
+//      Listener *listener;     A listener that record actions
+//                              from user.
 // Return: void
 // -------------------------------------------------------------  
 void EventsManager::register_listener(Listener *listener) {
@@ -207,9 +210,10 @@ void EventsManager::register_listener(Listener *listener) {
 
 // -------------------------------------------------------------  
 // Function: unregister_listener()  
-// Description: 
+// Description: Set the unregister listener.
 // Parameters:
-//      Listener *listener;     Escrever aqui
+//      Listener *listener;     A listener that record actions
+//                              from user.
 // Return: void
 // ------------------------------------------------------------- 
 void EventsManager::unregister_listener(Listener *listener) {
