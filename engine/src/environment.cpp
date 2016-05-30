@@ -1,40 +1,27 @@
-/*
- * Implementação da classe Environment.
- *
- * Autor: Edson Alves
- * Data: 06/04/2015
- * Licença: LGPL. Sem copyright.
- */
+#include "core/camera.h"
 #include "core/environment.h"
 #include "core/video.h"
-#include "core/camera.h"
 
 static Environment *env = nullptr;
 
 Environment::Environment()
     : video(nullptr), resources_manager(nullptr), events_manager(nullptr),
     audio_manager(nullptr), canvas(nullptr), camera(nullptr), music(nullptr),
-    sfx(nullptr), m_settings_path("")
-{
+    sfx(nullptr), m_settings_path("") {
 }
 
-Environment::~Environment()
-{
+Environment::~Environment() {
     delete audio_manager;
     delete events_manager;
     delete resources_manager;
     delete video;
 }
 
-Environment *
-Environment::get_instance() throw (Exception)
-{
-    if (not env)
-    {
+Environment * Environment::get_instance() throw (Exception) {
+    if (not env) {
         env = new Environment();
 
-        if (not env)
-        {
+        if (not env) {
             throw Exception("Out of memory for a new Environment");
         }
 
@@ -44,20 +31,15 @@ Environment::get_instance() throw (Exception)
     return env;
 }
 
-void
-Environment::release_instance()
-{
+void Environment::release_instance() {
     delete env;
     env = nullptr;
 }
 
-void
-Environment::init() throw (Exception)
-{
+void Environment::init() throw (Exception) {
     video = new Video();
 
-    if (not video)
-    {
+    if (not video) {
         throw Exception("Out of memory for a new Video");
     }
 
@@ -67,22 +49,19 @@ Environment::init() throw (Exception)
 
     resources_manager = new ResourcesManager();
 
-    if (not resources_manager)
-    {
+    if (not resources_manager) {
         throw Exception("Out of memory for a new ResourcesManager");
     }
 
     events_manager = new EventsManager();
 
-    if (not events_manager)
-    {
+    if (not events_manager) {
         throw Exception("Out of memory for a new EventsManager");
     }
 
     audio_manager = new AudioManagerWrapper();
 
-    if (not audio_manager)
-    {
+    if (not audio_manager) {
         throw Exception("Out of memory for a new AudioManagerSfx");
     }
 
