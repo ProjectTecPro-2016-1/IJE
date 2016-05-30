@@ -13,6 +13,16 @@
 #include "core/bitmap.h"
 #include "core/environment.h"
 
+// -------------------------------------------------------------
+// Function: Canvas();
+// Description: Canvas class builder where the initializations of the variables happen.
+// Parameters:
+//      SDL_Renderer * renderer;        Description
+//      int w;
+//      int h;
+//
+// Return: void
+// -------------------------------------------------------------
 Canvas::Canvas(SDL_Renderer * renderer, int w, int h)
     : m_renderer(renderer), m_w(w), m_h(h), m_blend_mode(NONE) {
     set_color(Color::WHITE);
@@ -23,15 +33,33 @@ Canvas::Canvas(SDL_Renderer * renderer, int w, int h)
     SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
 }
 
+// -------------------------------------------------------------
+// Function: ~Canvas();
+// Description: Canvas class destructor in which images files free themselves.
+//
+// Return: void
+// -------------------------------------------------------------
 Canvas::~Canvas() {
     SDL_FreeSurface(m_bitmap);
     SDL_DestroyTexture(m_texture);
 }
 
+// -------------------------------------------------------------
+// Function: w();
+// Description:
+//
+// Return: int
+// -------------------------------------------------------------
 int Canvas::w() const {
     return m_w;
 }
 
+// -------------------------------------------------------------
+// Function: h();
+// Description:
+//
+// Return: int
+// -------------------------------------------------------------
 int Canvas::h() const {
     return m_h;
 }
@@ -48,11 +76,28 @@ Canvas::BlendMode Canvas::blend_mode() const {
     return m_blend_mode;
 }
 
+// -------------------------------------------------------------
+// Function: set_color();
+// Description:
+// Parameters:
+//      const Color& color;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::set_color(const Color& color) {
     m_color = color;
     SDL_SetRenderDrawColor(m_renderer, color.r(), color.g(), color.b(), color.a());
 }
 
+// -------------------------------------------------------------
+// Function: set_resolution();
+// Description:
+// Parameters:
+//      int w;        Description
+//      int h;
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::set_resolution(int w, int h) {
     if (m_bitmap) {
         SDL_FreeSurface(m_bitmap);
@@ -74,10 +119,26 @@ void Canvas::set_resolution(int w, int h) {
     m_h = h;
 }
 
+// -------------------------------------------------------------
+// Function: set_font();
+// Description:
+// Parameters:
+//      shared_ptr<Font>& font;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::set_font(shared_ptr<Font>& font) {
     m_font = font;
 }
 
+// -------------------------------------------------------------
+// Function: set_blend_mode();
+// Description:
+// Parameters:
+//      int x;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::set_blend_mode(BlendMode mode) {
     switch (mode) {
     case NONE:
@@ -96,6 +157,14 @@ void Canvas::set_blend_mode(BlendMode mode) {
     m_blend_mode = mode;
 }
 
+// -------------------------------------------------------------
+// Function: clear();
+// Description:
+// Parameters:
+//      const Color& color;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::clear(const Color& color) {
     if (color != m_color) {
         set_color(color);
@@ -106,10 +175,24 @@ void Canvas::clear(const Color& color) {
     SDL_RenderClear(m_renderer);
 }
 
+// -------------------------------------------------------------
+// Function: update();
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::update() {
     SDL_RenderPresent(m_renderer);
 }
 
+// -------------------------------------------------------------
+// Function: draw();
+// Description:
+// Parameters:
+//      const Point& point        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::draw(const Point& point) const {
     Environment * env = Environment::get_instance();
     int x = point.x() - env->camera->x();
@@ -118,6 +201,15 @@ void Canvas::draw(const Point& point) const {
     SDL_RenderDrawPoint(m_renderer, x, y);
 }
 
+// -------------------------------------------------------------
+// Function: draw();
+// Description:
+// Parameters:
+//      const Point& point;        Description
+//      const Color& color;
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::draw(const Point& point, const Color& color) {
     if (color != m_color) {
         set_color(color);
@@ -128,6 +220,14 @@ void Canvas::draw(const Point& point, const Color& color) {
     draw(point);
 }
 
+// -------------------------------------------------------------
+// Function: draw();
+// Description:
+// Parameters:
+//      const Line& line;;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::draw(const Line& line) const {
     Environment * env = Environment::get_instance();
     int xa = line.a().x() - env->camera->x();
@@ -138,6 +238,15 @@ void Canvas::draw(const Line& line) const {
     SDL_RenderDrawLine(m_renderer, xa, ya, xb, yb);
 }
 
+// -------------------------------------------------------------
+// Function: draw();
+// Description:
+// Parameters:
+//      const LIne& line;        Description
+//      const Color& color;
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::draw(const Line& line, const Color& color) {
     if (color != m_color) {
         set_color(color);
@@ -148,6 +257,14 @@ void Canvas::draw(const Line& line, const Color& color) {
     draw(line);
 }
 
+// -------------------------------------------------------------
+// Function: draw();
+// Description:
+// Parameters:
+//      Rect& rect;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::draw(const Rect& rect) const {
     Environment * env = Environment::get_instance();
     int x = rect.x() - env->camera->x();
@@ -162,6 +279,15 @@ void Canvas::draw(const Rect& rect) const {
     SDL_RenderDrawRect(m_renderer, &r);
 }
 
+// -------------------------------------------------------------
+// Function: draw();
+// Description:
+// Parameters:
+//      const Rect& rect;        Description
+//      const Color& color;
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::draw(const Rect& rect, const Color& color) {
     if (color != m_color) {
         set_color(color);
@@ -172,6 +298,14 @@ void Canvas::draw(const Rect& rect, const Color& color) {
     draw(rect);
 }
 
+// -------------------------------------------------------------
+// Function: fill();
+// Description:
+// Parameters:
+//      const Rect& rect;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::fill(const Rect& rect) const
 {
     Environment * env = Environment::get_instance();
@@ -185,6 +319,15 @@ void Canvas::fill(const Rect& rect) const
     SDL_RenderFillRect(m_renderer, &r);
 }
 
+// -------------------------------------------------------------
+// Function: fill();
+// Description:
+// Parameters:
+//      const Rect& rect;        Description
+//      const Color& color;
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::fill(const Rect& rect, const Color& color) {
     if (color != m_color) {
         set_color(color);
@@ -195,6 +338,14 @@ void Canvas::fill(const Rect& rect, const Color& color) {
     fill(rect);
 }
 
+// -------------------------------------------------------------
+// Function: draw();
+// Description:
+// Parameters:
+//      const Circle& circle;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::draw(const Circle& circle) const {
     Environment * env = Environment::get_instance();
     int cx = circle.center().x() - env->camera->x();
@@ -219,6 +370,14 @@ void Canvas::draw(const Circle& circle) const {
     } while (i <= j);
 }
 
+// -------------------------------------------------------------
+// Function: fill();
+// Description:
+// Parameters:
+//      Circle& circle;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::fill(const Circle& circle) const {
     Environment * env = Environment::get_instance();
 
@@ -243,6 +402,15 @@ void Canvas::fill(const Circle& circle) const {
     } while (i <= j);
 }
 
+// -------------------------------------------------------------
+// Function: fill();
+// Description:
+// Parameters:
+//      const Circle& circle;        Description
+//      const Color& color;
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::fill(const Circle& circle, const Color& color) {
     if (color != m_color) {
         set_color(color);
@@ -253,7 +421,15 @@ void Canvas::fill(const Circle& circle, const Color& color) {
     fill(circle);
 }
 
-
+// -------------------------------------------------------------
+// Function: draw();
+// Description:
+// Parameters:
+//      const Circle& circle;        Description
+//      const Color& color;
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::draw(const Circle& circle, const Color& color) {
     if (color != m_color) {
         set_color(color);
@@ -264,7 +440,17 @@ void Canvas::draw(const Circle& circle, const Color& color) {
     draw(circle);
 }
 
-
+// -------------------------------------------------------------
+// Function: draw_circle_points();
+// Description:
+// Parameters:
+//      int cx;        Description
+//      int cy;
+//      int x;
+//      int y;
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::draw_circle_points(int cx, int cy, int x, int y) const {
     SDL_Point points[] {
         {cx + x, cy + y}, {cx + x, cy - y}, {cx + y, cy + x}, {cx + y, cy - x},
@@ -274,6 +460,17 @@ void Canvas::draw_circle_points(int cx, int cy, int x, int y) const {
     SDL_RenderDrawPoints(m_renderer, points, 8);
 }
 
+// -------------------------------------------------------------
+// Function: fill_circle_points();
+// Description:
+// Parameters:
+//      int cx;        Description
+//      int cy;
+//      int x;
+//      int y;;
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::fill_circle_points(int cx, int cy, int x, int y) const {
     draw(Line(Point(cx + x, cy + y), Point(cx + x, cy - y)));
     draw(Line(Point(cx - x, cy + y), Point(cx - x, cy - y)));
@@ -281,7 +478,19 @@ void Canvas::fill_circle_points(int cx, int cy, int x, int y) const {
     draw(Line(Point(cx - y, cy + x), Point(cx - y, cy - x)));
 }
 
-void Canvas::draw(const Texture *texture, double x, double y, double w, double h) const {
+// -------------------------------------------------------------
+// Function: draw();
+// Description:
+// Parameters:
+//      Texture * texture;        Description
+//      double x;
+//      double y;
+//      double w;
+//      double h;
+//
+// Return: void
+// -------------------------------------------------------------
+void Canvas::draw(const Texture * texture, double x, double y, double w, double h) const {
     if (not texture) {
         return;
     } else {
@@ -293,7 +502,20 @@ void Canvas::draw(const Texture *texture, double x, double y, double w, double h
     draw(texture, clip, x, y, w, h);
 }
 
-void Canvas::draw(const Texture *texture, Rect clip, double x, double y, double w, double h) const {
+// -------------------------------------------------------------
+// Function: draw();
+// Description:
+// Parameters:
+//      const Texture * texture;        Description
+//      Rect clip;
+//      double x;
+//      double y;
+//      double w;
+//      double h;
+//
+// Return: void
+// -------------------------------------------------------------
+void Canvas::draw(const Texture * texture, Rect clip, double x, double y, double w, double h) const {
     Environment * env = Environment::get_instance();
 
     int orig_x = (int) clip.x();
@@ -318,6 +540,17 @@ SDL_Renderer * Canvas::renderer() const {
     return m_renderer;
 }
 
+// -------------------------------------------------------------
+// Function: draw();
+// Description:
+// Parameters:
+//      const string& text;       Description
+//      double x;
+//      double y;
+//       const Color& color;
+//
+// Return: void
+// -------------------------------------------------------------
 void Canvas::draw(const string& text, double x, double y, const Color& color) const {
     if (not m_font.get()) {
         return;
@@ -402,6 +635,15 @@ SDL_Surface * Canvas::bitmap() const {
     return m_bitmap;
 }
 
+// -------------------------------------------------------------
+// Function: draw();
+// Description:
+// Parameters:
+//      const Bitmap * bitmap;        Description
+//      double;
+//      double;
+// Return: void
+// -------------------------------------------------------------
 void Canvas::draw(const Bitmap * bitmap, double, double) const {
     SDL_UpdateTexture(m_texture, NULL, bitmap->pixels(), m_w * sizeof(Uint32));
     SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);

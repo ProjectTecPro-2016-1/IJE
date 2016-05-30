@@ -1,7 +1,7 @@
 #include <cassert>
 #include <iostream>
-
 #include <SDL2/SDL_mixer.h>
+
 #include "core/audiomanager.h"
 #include "core/music.h"
 #include "core/soundeffect.h"

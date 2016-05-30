@@ -11,17 +11,37 @@
 using std::cout;
 using std::endl;
 
+// -------------------------------------------------------------
+// Function: AUdioManagerWrapper()
+// Description: Audio Manager Wrapper class builder where the initializations
+//                      of the variables happen.
+//
+// Return: void
+// -------------------------------------------------------------
 AudioManagerWrapper::AudioManagerWrapper()
     : sfx_manager{nullptr}, music_manager{nullptr} {
     open_audio();
 }
 
+// -------------------------------------------------------------
+// Function: ~AudioManagerWrapper()
+// Description: Audio Manager Wrapper class destructor in which images files
+//                      free themselves.
+//
+// Return: void
+// -------------------------------------------------------------
 AudioManagerWrapper::~AudioManagerWrapper() {
     close_audio();
     delete music_manager;
     delete sfx_manager;
 }
 
+// -------------------------------------------------------------
+// Function: init()
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
 void AudioManagerWrapper::init() throw (Exception) {
     sfx_manager = new AudioManagerSfx();
 
@@ -48,12 +68,24 @@ AudioManagerMusic * AudioManagerWrapper::music() const {
     return music_manager;
 }
 
+// -------------------------------------------------------------
+// Function: open_audio()
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
 void AudioManagerWrapper::open_audio() {
     SDL_InitSubSystem(SDL_INIT_AUDIO);
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
     Mix_AllocateChannels(4000);
 }
 
+// -------------------------------------------------------------
+// Function: close_audio()
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
 void AudioManagerWrapper::close_audio() {
     // Query the specifications of the opened audio, to figure out how many times we need to
     // close the audio.

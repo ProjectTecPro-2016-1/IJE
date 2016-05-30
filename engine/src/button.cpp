@@ -23,6 +23,16 @@ public:
         m_state(IDLE), m_idle_texture(nullptr), m_active_texture(nullptr) {
     }
 
+// -------------------------------------------------------------
+// Function: Impl()
+// Description: Impl class builder where the initializations of the variables happen.
+// Parameters:
+//      Button * button;        Description
+//      const string& idle_image_id;
+//      const string& active_image_id;
+//
+// Return: void
+// -------------------------------------------------------------
     Impl(Button * button, const string& idle_image_id,
         const string& active_image_id)
         : m_button(button), m_text(nullptr), m_idle(Color::GREEN),
@@ -37,11 +47,25 @@ public:
         m_button->set_dimensions(m_idle_texture->w(), m_idle_texture->h());
     }
 
-
+// -------------------------------------------------------------
+// Function: ~Impl()
+// Description: Impl class destructor in which images files free themselves.
+//
+// Return: void
+// -------------------------------------------------------------
     ~Impl() {
         delete m_text;
     }
 
+// -------------------------------------------------------------
+// Function: set_text()
+// Description:
+// Parameters:
+//      const string& text;        Description
+//      const Color& color;
+//
+// Return: void
+// -------------------------------------------------------------
     void set_text(const string& text, const Color& color) {
         if (text.size() > 0) {
             delete m_text;
@@ -51,16 +75,42 @@ public:
         }
     }
 
+// -------------------------------------------------------------
+// Function: set_color()
+// Description:
+// Parameters:
+//      const Color& idle;        Description
+//      const Color& active;
+//
+// Return: void
+// -------------------------------------------------------------
     void set_color(const Color& idle, const Color& active) {
         m_idle = idle;
         m_active = active;
     }
 
+// -------------------------------------------------------------
+// Function: set_border()
+// Description:
+// Parameters:
+//      int thickness;        Description
+//      const Color& color;
+//
+// Return: void
+// -------------------------------------------------------------
     void set_border(int thickness, const Color& color) {
         m_border = color;
         m_thickness = thickness;
     }
 
+// -------------------------------------------------------------
+// Function: on_event()
+// Description:
+// Parameters:
+//      const MouseButtonEvent& event;        Description
+//
+// Return: bool
+// -------------------------------------------------------------
     bool on_event(const MouseButtonEvent& event) {
         if (event.state() == MouseButtonEvent::PRESSED and
             event.button() == MouseButtonEvent::LEFT and
@@ -77,6 +127,14 @@ public:
         return false;
     }
 
+// -------------------------------------------------------------
+// Function: on_event()
+// Description:
+// Parameters:
+//      const MouseMotionEvent& event        Description
+//
+// Return: bool
+// -------------------------------------------------------------
     bool on_event(const MouseMotionEvent& event) {
         if (m_button->bounding_box().contains(event.x(), event.y())) {
             m_state = ACTIVE;
@@ -101,6 +159,12 @@ public:
         return false;
     }
 
+// -------------------------------------------------------------
+// Function: draw_self()
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
     void draw_self() {
         Environment * env = Environment::get_instance();
         shared_ptr<Texture> image;
@@ -165,6 +229,17 @@ Button::Button(Object * parent, ObjectID id, double w, double h)
     env->events_manager->register_listener(this);
 }
 
+// -------------------------------------------------------------
+// Function: Button()
+// Description: Button class builder where the initializations os the variables happen.
+// Parameters:
+//      Object * parent;        Description
+//      ObjectID id;
+//      const string& idle_image_id;
+//      const string& active_image_id;
+//
+// Return: void
+// -------------------------------------------------------------
 Button::Button(Object * parent, ObjectID id, const string& idle_image_id,
     const string& active_image_id)
     : Object(parent, id), m_impl(new Impl(this, idle_image_id, active_image_id)) {
@@ -172,31 +247,74 @@ Button::Button(Object * parent, ObjectID id, const string& idle_image_id,
     env->events_manager->register_listener(this);
 }
 
+// -------------------------------------------------------------
+// Function: ~Button()
+// Description: Button class destructor in which images files free themselves.
+//
+// Return: void
+// -------------------------------------------------------------
 Button::~Button() {
     Environment * env = Environment::get_instance();
     env->events_manager->unregister_listener(this);
 }
 
+// -------------------------------------------------------------
+// Function: draw_self()
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
 void Button::draw_self() {
     m_impl->draw_self();
 }
 
+// -------------------------------------------------------------
+// Function: on_event()
+// Description:
+// Parameters:
+//      const MouseButtonEvent& event;        Description
+//
+// Return: bool
+// -------------------------------------------------------------
 bool Button::on_event(const MouseButtonEvent& event) {
     return m_impl->on_event(event);
 }
 
-bool Button::on_event(const MouseMotionEvent& event) {
-    return m_impl->on_event(event);
-}
-
+// -------------------------------------------------------------
+// Function: set_text();
+// Description:
+// Parameters:
+//      const strung& text;        Description
+//      const Color& color;
+//
+// Return: void
+// -------------------------------------------------------------
 void Button::set_text(const string& text, const Color& color) {
     return m_impl->set_text(text, color);
 }
 
+// -------------------------------------------------------------
+// Function: set_color();
+// Description:
+// Parameters:
+//      const Color& idle;        Description
+//      const Color& active;
+//
+// Return: void
+// -------------------------------------------------------------
 void Button::set_color(const Color& idle, const Color& active) {
     return m_impl->set_color(idle, active);
 }
 
+// -------------------------------------------------------------
+// Function: set_border();
+// Description:
+// Parameters:
+//      int thickness;        Description
+//      const Color& color;
+//
+// Return: void
+// -------------------------------------------------------------
 void Button::set_border(int thickness, const Color& color) {
     return m_impl->set_border(thickness, color);
 }
