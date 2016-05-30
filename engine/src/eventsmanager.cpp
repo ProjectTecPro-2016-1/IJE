@@ -54,7 +54,9 @@ class EventsManager::Impl {
         void register_listener(Listener *listener) {
             if (listener) {
                 m_listeners.push_back(listener);
-            } 
+            } else {
+                // Nothing to do
+            }
         }
 
         // -------------------------------------------------------------  
@@ -84,6 +86,8 @@ class EventsManager::Impl {
                         for (auto ls : m_listeners) {
                             if (ls->active() and ls->on_event(se)) {
                                 break;
+                            } else {
+                                // Nothing to do
                             }
                         }
 
@@ -96,20 +100,24 @@ class EventsManager::Impl {
                         for (auto ls : m_listeners) {
                             if (ls->active() and ls->on_event(me)) {
                                 break;
+                            } else {
+                                // Nothing to do
                             }
                         }
 
                         break;
                     }
 
-
                     case SDL_MOUSEBUTTONDOWN:
+                        // Nothing to do
                     case SDL_MOUSEBUTTONUP: {
                         MouseButtonEvent me = MouseButtonEvent::from_SDL(e);
 
                         for (auto ls : m_listeners) {
                             if (ls->active() and ls->on_event(me)) {
                                 break;
+                            } else {
+                                // Nothing to do
                             }
                         }
 
@@ -117,16 +125,21 @@ class EventsManager::Impl {
                     }
 
                     case SDL_KEYDOWN:
+                        // Nothing to do
                     case SDL_KEYUP: {
                         if (e.key.repeat != 0) {
                             break;
-                        } 
+                        } else {
+                            // Nothing to do
+                        }
 
                         KeyboardEvent ke = KeyboardEvent::from_SDL(e);
 
                         for (auto ls : m_listeners) {
                             if (ls->active() and ls->on_event(ke)) {
                                 break;
+                            } else {
+                                // Nothing to do
                             }
                         }
 
@@ -134,13 +147,16 @@ class EventsManager::Impl {
                     }
 
                     case SDL_CONTROLLERBUTTONDOWN:
+                        // Nothing to do
                     case SDL_CONTROLLERBUTTONUP: {
                         JoyStickEvent je = JoyStickEvent::from_SDL(e);
 
                         for (auto ls : m_listeners) {
                             if (ls->active() and ls->on_event(je)) {
                                 break;
-                            } 
+                            } else {
+                                // Nothing to do
+                            }
                         }
 
                         break;
