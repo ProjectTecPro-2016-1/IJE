@@ -18,6 +18,14 @@ public:
         texture = env->resources_manager->get_texture(id);
     }
 
+// -------------------------------------------------------------
+// Function:
+// Description:
+// Parameters:
+//      int x;        Description
+//
+// Return: void
+// -------------------------------------------------------------
     void reset() {
         last = frame = 0;
     }
@@ -31,18 +39,53 @@ public:
     shared_ptr<Texture> texture;
 };
 
+// -------------------------------------------------------------
+// Function: Animmation ()
+// Description: Animation class builder where the initializations of variables happen.
+// Parameters:
+//      const string& texture;                  Description
+//      double x;
+//      double y;
+//      double w;
+//      double h;
+//      int frames;
+//      unsigned long speed_in_ms;
+//      bool loop;
+//
+// Return: void
+// -------------------------------------------------------------
 Animation::Animation(const string& texture, double x, double y, double w,
     double h, int frames, unsigned long speed_in_ms, bool loop)
     : m_impl(new Animation::Impl(texture, x, y, w, h, frames, speed_in_ms, loop)) {
 }
 
+// -------------------------------------------------------------
+// Function: ~Animation()
+// Description: Animation class destructor in which images files free themselves.
+//
+// Return: void
+// -------------------------------------------------------------
 Animation::~Animation() {
 }
 
+// -------------------------------------------------------------
+// Function: is_done()
+// Description:
+//
+// Return: bool
+// -------------------------------------------------------------
 bool Animation::is_done() const {
     return m_impl->done;
 }
 
+// -------------------------------------------------------------
+// Function: update()
+// Description: Update the animation at the moment.
+// Parameters:
+//      unsigned long elapsed        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Animation::update(unsigned long elapsed) {
     if (not m_impl->last) {
         m_impl->last = elapsed;
@@ -67,6 +110,15 @@ void Animation::update(unsigned long elapsed) {
     }
 }
 
+// -------------------------------------------------------------
+// Function: draw()
+// Description: Draws the animation in the screen.
+// Parameters:
+//      double x;        Description
+//      double y;
+//
+// Return: void
+// -------------------------------------------------------------
 void Animation::draw(double x, double y) {
     if (m_impl->done) {
         return;
@@ -82,14 +134,34 @@ void Animation::draw(double x, double y) {
     env->canvas->draw(m_impl->texture.get(), clip, x, y, clip.w(), clip.h());
 }
 
+// -------------------------------------------------------------
+// Function: w()
+// Description:
+//
+// Return: double
+// -------------------------------------------------------------
 double Animation::w() const {
     return m_impl->w;
 }
 
+// -------------------------------------------------------------
+// Function: h()
+// Description:
+//
+// Return: double
+// -------------------------------------------------------------
 double Animation::h() const {
     return m_impl->h;
 }
 
+// -------------------------------------------------------------
+// Function: set_row()
+// Description:
+// Parameters:
+//      int row;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Animation::set_row(int row) {
     int y = row * m_impl->h;
 
@@ -102,6 +174,12 @@ void Animation::set_row(int row) {
     m_impl->y = y;
 }
 
+// -------------------------------------------------------------
+// Function: reset()
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
 void Animation::reset() {
     m_impl->reset();
 }

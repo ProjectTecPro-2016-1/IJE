@@ -20,14 +20,38 @@ public:
         return m_mode;
     }
 
+// -------------------------------------------------------------
+// Function: set_mode();
+// Description:
+// Parameters:
+//      Mode mode;        Description
+//
+// Return: void
+// -------------------------------------------------------------
     void set_mode(Mode mode) {
         m_mode = mode;
     }
 
+// -------------------------------------------------------------
+// Function: follow();
+// Description:
+// Parameters:
+//      const Object * target;        Description
+//
+// Return: void
+// -------------------------------------------------------------
     void follow(const Object * target) {
         m_target = target;
     }
 
+// -------------------------------------------------------------
+// Function: update_self();
+// Description:
+// Parameters:
+//      unsigned long;        Description
+//
+// Return: void
+// -------------------------------------------------------------
     void update_self(unsigned long) {
         if (m_mode == Camera::FOLLOWING and m_target) {
             double x = m_target->x() + (m_target->w() - m_camera->w()) / 2;
@@ -63,9 +87,23 @@ public:
         }
     }
 
+// -------------------------------------------------------------
+// Function: draw_self();
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
     void draw_self() {
     }
 
+// -------------------------------------------------------------
+// Function: set_limits();
+// Description:
+// Parameters:
+//      const Rect& limits;        Description
+//
+// Return: void
+// -------------------------------------------------------------
     void set_limits(const Rect& limits) {
         m_limits = limits;
     }
@@ -77,10 +115,28 @@ private:
     Rect m_limits;
 };
 
+// -------------------------------------------------------------
+// Function: Camera();
+// Description: Camera class builder where the initializations os the variables happnen;
+// Parameters:
+//      double x;        Description
+//      double y;
+//      double w;
+//      double h;
+//      Mode mode;
+//
+// Return: void
+// -------------------------------------------------------------
 Camera::Camera(double x, double y, double w, double h, Mode mode)
     : Object(nullptr, "", x, y, w, h), m_impl(new Camera::Impl(this, mode)) {
 }
 
+// -------------------------------------------------------------
+// Function: ~Camera();
+// Description: Camera class destructor in which images files free themselves;
+//
+// Return: void
+// -------------------------------------------------------------
 Camera::~Camera() {
 }
 
@@ -88,22 +144,60 @@ Camera::Mode Camera::mode() const {
     return m_impl->mode();
 }
 
+// -------------------------------------------------------------
+// Function: set_mode()
+// Description:
+// Parameters:
+//      Mode mode;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Camera::set_mode(Mode mode) {
     m_impl->set_mode(mode);
 }
 
+// -------------------------------------------------------------
+// Function: update_self();
+// Description:
+// Parameters:
+//      unsigned long elapsed;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Camera::update_self(unsigned long elapsed) {
     m_impl->update_self(elapsed);
 }
 
+// -------------------------------------------------------------
+// Function: draw_self();
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
 void Camera::draw_self() {
     m_impl->draw_self();
 }
 
+// -------------------------------------------------------------
+// Function: follow();
+// Description:
+// Parameters:
+//      const Object * object;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Camera::follow(const Object * object) {
     m_impl->follow(object);
 }
 
+// -------------------------------------------------------------
+// Function: set_limits();
+// Description:
+// Parameters:
+//      const Rect& limits;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 void Camera::set_limits(const Rect& limits) {
     m_impl->set_limits(limits);
 }

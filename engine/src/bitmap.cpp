@@ -8,10 +8,26 @@
 
 class Bitmap::Impl {
 public:
+// -------------------------------------------------------------
+// Function: Impl()
+// Description: Impl class builder where the initializations of the variables happen.
+// Parameters:
+//     void *data;        Description
+//      int w;
+//      int h;
+//
+// Return: void
+// -------------------------------------------------------------
     Impl(void *data, int w, int h) : m_w(w), m_h(h) {
         m_bitmap = static_cast<SDL_Surface *>(data);
     }
 
+// -------------------------------------------------------------
+// Function: ~Impl()
+// Description: Impl class destructor in which images files free themselves.
+//
+// Return: void
+// -------------------------------------------------------------
     ~Impl() {
         if (m_bitmap) {
             SDL_FreeSurface(m_bitmap);
@@ -20,9 +36,22 @@ public:
         }
     }
 
+// -------------------------------------------------------------
+// Function: w()
+// Description:
+//
+// Return: int
+// -------------------------------------------------------------
     int w() const  {
         return m_w;
     }
+
+// -------------------------------------------------------------
+// Function: h()
+// Description:
+//
+// Return: int
+// -------------------------------------------------------------
     int h() const {
         return m_h;
     }
@@ -31,14 +60,35 @@ public:
         return m_bitmap;
     }
 
+// -------------------------------------------------------------
+// Function: pixels()
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
     void * pixels() const {
         return m_bitmap->pixels;
     }
 
+// -------------------------------------------------------------
+// Function: clear()
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
     void clear() {
         SDL_FillRect(m_bitmap, nullptr, 0);
     }
 
+// -------------------------------------------------------------
+// Function: fill()
+// Description:
+// Parameters:
+//      const Rect&;        Description
+//      Uint32 color;
+//
+// Return: void
+// -------------------------------------------------------------
     void fill(const Rect& r, Uint32 color) {
         SDL_Rect rect { (int) r.x(), (int) r.y(), (int) r.w(), (int) r.h()
         };
@@ -51,24 +101,66 @@ private:
     SDL_Surface * m_bitmap;
 };
 
+// -------------------------------------------------------------
+// Function:
+// Description:
+// Parameters:
+//      int x;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 Bitmap::Bitmap(void * data, int w, int h) : m_impl(new Impl(data, w, h)) {
 }
 
+// -------------------------------------------------------------
+// Function:
+// Description:
+// Parameters:
+//      int x;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 Bitmap::Bitmap(Canvas * canvas) : m_impl(new Impl((void *) SDL_CreateRGBSurface(0, canvas->w(), canvas->h(), 32, 0, 0, 0, 0),
         canvas->w(), canvas->h())) {
 }
 
+// -------------------------------------------------------------
+// Function:
+// Description:
+// Parameters:
+//      int x;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 Bitmap::~Bitmap() {
 }
 
+// -------------------------------------------------------------
+// Function: data()
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
 void * Bitmap::data() const {
     return m_impl->data();
 }
 
+// -------------------------------------------------------------
+// Function: w()
+// Description:
+//
+// Return: int
+// -------------------------------------------------------------
 int Bitmap::w() const {
     return m_impl->w();
 }
 
+// -------------------------------------------------------------
+// Function: h()
+// Description:
+//
+// Return: int
+// -------------------------------------------------------------
 int Bitmap::h() const {
     return m_impl->h();
 }
@@ -93,14 +185,34 @@ Bitmap * Bitmap::from_file(const string& path) throw (Exception) {
     return b;
 }
 
+// -------------------------------------------------------------
+// Function: pixels()
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
 void * Bitmap::pixels() const {
     return m_impl->pixels();
 }
 
+// -------------------------------------------------------------
+// Function: clear()
+// Description:
+//
+// Return: void
+// -------------------------------------------------------------
 void Bitmap::clear() {
     m_impl->clear();
 }
 
+// -------------------------------------------------------------
+// Function:
+// Description:
+// Parameters:
+//      int x;        Description
+//
+// Return: void
+// -------------------------------------------------------------
 Uint32 Bitmap::getpixel(SDL_Surface *surface, int x, int y) {
     int bpp = surface->format->BytesPerPixel;
     Uint8 * p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
@@ -131,6 +243,17 @@ Uint32 Bitmap::getpixel(SDL_Surface *surface, int x, int y) {
     }
 }
 
+// -------------------------------------------------------------
+// Function: putpixel()
+// Description:
+// Parameters:
+//      SDL_Surface * surface;        Description
+//      int x;
+//      int y;
+//      Uint32 pixel;
+//
+// Return: void
+// -------------------------------------------------------------
 void Bitmap::putpixel(SDL_Surface * surface, int x, int y, Uint32 pixel) {
     int bpp = surface->format->BytesPerPixel;
     Uint8 * p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
@@ -166,6 +289,15 @@ void Bitmap::putpixel(SDL_Surface * surface, int x, int y, Uint32 pixel) {
     }
 }
 
+// -------------------------------------------------------------
+// Function: fill()
+// Description:
+// Parameters:
+//      const Rect& r;        Description
+//      Uint32 color;
+//
+// Return: void
+// -------------------------------------------------------------
 void Bitmap::fill(const Rect& r, Uint32 color) {
     m_impl->fill(r, color);
 }
