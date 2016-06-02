@@ -19,6 +19,8 @@ class Sprite::Impl {
 
             if (it == m_fsm.end()) {
                 return;
+            } else {
+                // Nothing to do
             }
 
             int next = it->second;
@@ -31,10 +33,14 @@ class Sprite::Impl {
 
             if (it == m_states.end()) {
                 return;
+            } else {
+                // Nothing to do
             }
 
             if (m_state) {
                 m_state->leave(to);
+            } else {
+                // Nothing to do
             }
 
             m_state_id = to;
@@ -42,6 +48,8 @@ class Sprite::Impl {
 
             if (m_state) {
                 m_state->enter(from);
+            } else {
+                // Nothing to do
             }
         }
 
@@ -56,12 +64,16 @@ class Sprite::Impl {
         void update_self(unsigned long elapsed) {
             if (m_state) {
                 m_state->update(elapsed);
+            } else {
+                // Nothing to do
             }
         }
 
         void draw_self() {
             if (m_state) {
                 m_state->draw();
+            } else {
+                // Nothing to do
             }
         }
 
@@ -72,6 +84,8 @@ class Sprite::Impl {
         bool on_event(const KeyboardEvent& event) {
             if (m_state) {
                 return m_state->on_event(event);
+            } else {
+                // Nothing to do
             }
 
             return false;
@@ -80,6 +94,8 @@ class Sprite::Impl {
         bool on_event(const MouseButtonEvent& event) {
             if (m_state) {
                 return m_state->on_event(event);
+            } else {
+                // Nothing to do
             }
 
             return false;
@@ -88,6 +104,8 @@ class Sprite::Impl {
         bool on_event(const MouseMotionEvent& event) {
             if (m_state) {
                 return m_state->on_event(event);
+            } else {
+                // Nothing to do
             }
 
             return false;
@@ -96,6 +114,8 @@ class Sprite::Impl {
         bool on_event(const JoyStickEvent& event) {
             if (m_state) {
                 return m_state->on_event(event);
+            } else {
+                // Nothing to do
             }
 
             return false;
