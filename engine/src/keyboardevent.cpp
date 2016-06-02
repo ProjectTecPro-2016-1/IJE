@@ -23,9 +23,16 @@ static KeyboardEvent::Modifier key_modifier(Uint16 modifier) {
 
         default:
             return KeyboardEvent::NONE;
-        }
+    }
 }
 
+// -------------------------------------------------------------  
+// Function: Escrever aqui 
+// Description: Escrever aqui
+// Parameters:
+//      Escrever aqui;         Escrever aqui
+// Return: Escrever aqui
+// -------------------------------------------------------------   
 void init_table() {
     m_key_table[SDLK_BACKSPACE] = KeyboardEvent::BACKSPACE;
     m_key_table[SDLK_TAB] = KeyboardEvent::TAB;
@@ -122,26 +129,65 @@ void init_table() {
     m_key_table[SDLK_F12] = KeyboardEvent::F12;
 }
 
+// -------------------------------------------------------------  
+// Function: Escrever aqui 
+// Description: Escrever aqui
+// Parameters:
+//      Escrever aqui;         Escrever aqui
+// Return: Escrever aqui
+// ------------------------------------------------------------- 
 KeyboardEvent::KeyboardEvent(State state, Key key, Modifier modifier)
     : m_state(state), m_key(key), m_modifier(modifier) {
 }
 
+
+// -------------------------------------------------------------  
+// Function: Escrever aqui 
+// Description: Escrever aqui
+// Parameters:
+//      Escrever aqui;         Escrever aqui
+// Return: Escrever aqui
+// ------------------------------------------------------------- 
 KeyboardEvent::State KeyboardEvent::state() const {
     return m_state;
 }
 
+// -------------------------------------------------------------  
+// Function: Escrever aqui 
+// Description: Escrever aqui
+// Parameters:
+//      Escrever aqui;         Escrever aqui
+// Return: Escrever aqui
+// ------------------------------------------------------------- 
 KeyboardEvent::Key KeyboardEvent::key() const {
     return m_key;
 }
 
+// -------------------------------------------------------------  
+// Function: Escrever aqui 
+// Description: Escrever aqui
+// Parameters:
+//      Escrever aqui;         Escrever aqui
+// Return: Escrever aqui
+// ------------------------------------------------------------- 
 KeyboardEvent::Modifier KeyboardEvent::modifier() const {
     return m_modifier;
 }
 
+
+// -------------------------------------------------------------  
+// Function: Escrever aqui 
+// Description: Escrever aqui
+// Parameters:
+//      Escrever aqui;         Escrever aqui
+// Return: Escrever aqui
+// ------------------------------------------------------------- 
 KeyboardEvent KeyboardEvent::from_SDL(const SDL_Event& event) {
     if (not was_init) {
         init_table();
         was_init = true;
+    } else {
+        // Nothing to do
     }
 
     KeyboardEvent::State state = (event.type == SDL_KEYDOWN ?
