@@ -25,7 +25,7 @@ class Font::Impl {
         ~Impl() {
             if (m_font) {
                 TTF_CloseFont(m_font);
-            }else {
+            } else {
                 // Nothing to do
             }
         }
