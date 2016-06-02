@@ -9,232 +9,205 @@ class Object::Impl {
         Impl(Object *base, Object *parent, ObjectID id, double x, double y,
             double w, double h)
             : m_base(base), m_parent(parent), m_id(id), m_box(x, y, w, h),
-            m_visible(true)
-        {
+            m_visible(true) {
         }
 
-        ~Impl()
-        {
-            if (m_parent)
-            {
+        ~Impl() {
+            if (m_parent) {
                 m_parent->remove_child(m_parent);
+            } else {
+                // Nothing to do
             }
 
-            while (not m_children.empty())
-            {
+            while (not m_children.empty()) {
                 Object *child = m_children.back();
                 m_children.pop_back();
                 delete child;
             }
         }
 
-        Object * parent() const
-        {
+        Object * parent() const {
             return m_parent;
         }
 
-        const list<Object *>& children() const
-        {
+        const list<Object *>& children() const {
             return m_children;
         }
 
-        ObjectID id() const
-        {
+        ObjectID id() const {
             return m_id;
         }
 
-        void align_to(const Object* object, Alignment xaxis, Alignment yaxis)
-        {
-            if (not object)
-            {
+        void align_to(const Object* object, Alignment xaxis, Alignment yaxis) {
+            if (not object) {
                 return;
+            } else {
+                // Nothing to do
             }
 
             double x = m_box.x();
 
-            switch (xaxis)
-            {
-            case LEFT:
-                x = object->x();
-                break;
+            switch (xaxis) {
+                case LEFT:
+                    x = object->x();
+                    break;
 
-            case CENTER:
-                x = (object->w() - m_box.w())/2 + object->x();
-                break;
+                case CENTER:
+                    x = (object->w() - m_box.w())/2 + object->x();
+                    break;
 
-            case RIGHT:
-                x = object->w() - m_box.w() + object->x();
-                break;
+                case RIGHT:
+                    x = object->w() - m_box.w() + object->x();
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
 
             double y = m_box.y();
 
-            switch (yaxis)
-            {
-            case TOP:
-                y = object->y();
-                break;
+            switch (yaxis) {
+                case TOP:
+                    y = object->y();
+                    break;
 
-            case MIDDLE:
-                y = (object->h() - m_box.h())/2 + object->y();
-                break;
+                case MIDDLE:
+                    y = (object->h() - m_box.h())/2 + object->y();
+                    break;
 
-            case BOTTOM:
-                y = object->h() - m_box.h() + object->y();
-                break;
+                case BOTTOM:
+                    y = object->h() - m_box.h() + object->y();
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
 
             m_box.set_position(x, y);
             m_base->set_position(x, y);
         }
 
-        void add_child(Object *child)
-        {
-            if (child)
-            {
+        void add_child(Object *child) {
+            if (child) {
                 m_children.push_back(child);
                 child->set_parent(m_parent);
+            } else {
+                // Nothing to do
             }
         }
 
-        void remove_child(Object *child)
-        {
+        void remove_child(Object *child) {
             m_children.remove(child);
         }
 
-        bool send_message(Object *receiver, MessageID id, Parameters parameters)
-        {
-            if (receiver)
-            {
+        bool send_message(Object *receiver, MessageID id, Parameters parameters) {
+            if (receiver) {
                 return receiver->on_message(m_base, id, parameters);
+            } else {
+                // Nothing to do
             }
 
             return false;
         }
 
-        void add_observer(Object *observer)
-        {
-            if (observer)
-            {
+        void add_observer(Object *observer) {
+            if (observer) {
                 m_observers.push_back(observer);
+            } else {
+                // Nothing to do
             }
         }
 
-        void remove_observer(Object *observer)
-        {
+        void remove_observer(Object *observer) {
             m_observers.remove(observer);
         }
 
-        void notify(ActionID action, Parameters parameters)
-        {
-            for (auto observer : m_observers)
-            {
-                if (send_message(observer, action, parameters))
-                {
+        void notify(ActionID action, Parameters parameters) {
+            for (auto observer : m_observers) {
+                if (send_message(observer, action, parameters)) {
                     break;
+                } else {
+                    // Nothing to do
                 }
             }
         }
 
-        void update(unsigned long elapsed)
-        {
-            for (auto child : m_children)
-            {
+        void update(unsigned long elapsed) {
+            for (auto child : m_children) {
                 child->update(elapsed);
             }
 
             m_base->update_self(elapsed);
         }
 
-        void draw()
-        {
-            if (not visible())
-            {
+        void draw() {
+            if (not visible()) {
                 return;
+            } else {
+                // Nothing to do
             }
 
             m_base->draw_self();
 
-            for (auto child : m_children)
-            {
+            for (auto child : m_children) {
                 child->draw();
             }
         }
 
-        const Rect& bounding_box() const
-        {
+        const Rect& bounding_box() const {
             return m_box;
         }
 
-        double x() const
-        {
+        double x() const {
             return m_box.x();
         }
 
-        double y() const
-        {
+        double y() const {
             return m_box.y();
         }
 
-        double w() const
-        {
+        double w() const {
             return m_box.w();
         }
 
-        double h() const
-        {
+        double h() const {
             return m_box.h();
         }
 
-        void set_x(double x)
-        {
+        void set_x(double x) {
             m_box.set_x(x);
         }
 
-        void set_y(double y)
-        {
+        void set_y(double y) {
             m_box.set_y(y);
         }
 
-        void set_w(double w)
-        {
+        void set_w(double w) {
             m_box.set_w(w);
         }
 
-        void set_h(double h)
-        {
+        void set_h(double h) {
             m_box.set_h(h);
         }
 
 
-        void set_position(double x, double y)
-        {
+        void set_position(double x, double y) {
             m_box.set_position(x, y);
         }
 
-        void set_dimensions(double w, double h)
-        {
+        void set_dimensions(double w, double h) {
             m_box.set_dimensions(w, h);
         }
 
-        void set_parent(Object *parent)
-        {
+        void set_parent(Object *parent) {
             m_parent = parent;
         }
 
-        bool visible() const
-        {
+        bool visible() const {
             return m_visible;
         }
 
-        void set_visible(bool visible)
-        {
+        void set_visible(bool visible) {
             m_visible = visible;
         }
 
