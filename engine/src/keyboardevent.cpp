@@ -1,12 +1,4 @@
-/*
- * Implementação da classe que representa um evento de teclado.
- *
- * Autor: Edson Alves
- * Data: 22/04/2015
- * Licença: LGPL. Sem copyright.
- */
 #include "core/keyboardevent.h"
-
 #include <SDL2/SDL.h>
 #include <map>
 
@@ -15,30 +7,26 @@ using std::map;
 static bool was_init = false;
 static map<int, KeyboardEvent::Key> m_key_table;
 
-static KeyboardEvent::Modifier
-key_modifier(Uint16 modifier)
-{
-    switch (modifier)
-    {
-    case KMOD_CAPS:
-        return KeyboardEvent::CAPS;
+static KeyboardEvent::Modifier key_modifier(Uint16 modifier) {
+    switch (modifier) {
+        case KMOD_CAPS:
+            return KeyboardEvent::CAPS;
 
-    case KMOD_SHIFT:
-        return KeyboardEvent::SHIFT;
+        case KMOD_SHIFT:
+            return KeyboardEvent::SHIFT;
 
-    case KMOD_ALT:
-        return KeyboardEvent::ALT;
+        case KMOD_ALT:
+            return KeyboardEvent::ALT;
 
-    case KMOD_CTRL:
-        return KeyboardEvent::CONTROL;
+        case KMOD_CTRL:
+            return KeyboardEvent::CONTROL;
 
-    default:
-        return KeyboardEvent::NONE;
-    }
+        default:
+            return KeyboardEvent::NONE;
+        }
 }
 
-void init_table()
-{
+void init_table() {
     m_key_table[SDLK_BACKSPACE] = KeyboardEvent::BACKSPACE;
     m_key_table[SDLK_TAB] = KeyboardEvent::TAB;
     m_key_table[SDLK_CLEAR] = KeyboardEvent::CLEAR;
@@ -135,39 +123,29 @@ void init_table()
 }
 
 KeyboardEvent::KeyboardEvent(State state, Key key, Modifier modifier)
-    : m_state(state), m_key(key), m_modifier(modifier)
-{
+    : m_state(state), m_key(key), m_modifier(modifier) {
 }
 
-KeyboardEvent::State
-KeyboardEvent::state() const
-{
+KeyboardEvent::State KeyboardEvent::state() const {
     return m_state;
 }
 
-KeyboardEvent::Key
-KeyboardEvent::key() const
-{
+KeyboardEvent::Key KeyboardEvent::key() const {
     return m_key;
 }
 
-KeyboardEvent::Modifier
-KeyboardEvent::modifier() const
-{
+KeyboardEvent::Modifier KeyboardEvent::modifier() const {
     return m_modifier;
 }
 
-KeyboardEvent
-KeyboardEvent::from_SDL(const SDL_Event& event)
-{
-    if (not was_init)
-    {
+KeyboardEvent KeyboardEvent::from_SDL(const SDL_Event& event) {
+    if (not was_init) {
         init_table();
         was_init = true;
     }
 
     KeyboardEvent::State state = (event.type == SDL_KEYDOWN ?
-        KeyboardEvent::PRESSED : KeyboardEvent::RELEASED);
+    KeyboardEvent::PRESSED : KeyboardEvent::RELEASED);
     KeyboardEvent::Key key = m_key_table[event.key.keysym.sym];
     KeyboardEvent::Modifier modifier = key_modifier(event.key.keysym.mod);
 
