@@ -58,7 +58,7 @@ class FrontEnd::Impl {
 
         // -------------------------------------------------------------  
         // Function: on_event()  
-        // Description: Check tha action on keyboard.
+        // Description: Check if keyboard was pressed or not.
         // Parameters:
         //      const KeyboardEvent& event;     Event of action on 
         //                                      keyboard
@@ -68,6 +68,8 @@ class FrontEnd::Impl {
             if (event.state() == KeyboardEvent::PRESSED) {
                 m_parent->finish();
                 return true;
+            } else {
+                // Nothing to do
             }
 
             return false;
@@ -75,16 +77,18 @@ class FrontEnd::Impl {
 
         // -------------------------------------------------------------  
         // Function: on_event()  
-        // Description: 
+        // Description: Check the if JoyStick was pressed or not.
         // Parameters:
         //      const JoyStickEvent& event;     Event of action on 
-        //                                      joystick
+        //                                      JoyStick
         // Return: bool
         // -------------------------------------------------------------   
         bool on_event(const JoyStickEvent& event) {
             if (event.state() == JoyStickEvent::PRESSED) {
                 m_parent->finish();
                 return true;
+            } else {
+                // Nothing to do
             }
 
             return false;
@@ -92,14 +96,16 @@ class FrontEnd::Impl {
 
         // -------------------------------------------------------------  
         // Function: update_self()  
-        // Description: Escrever aqui
+        // Description: 
         // Parameters:
-        //      unsigned long elapsed;     Escrever aqui
+        //      unsigned long elapsed;     
         // Return: void
         // -------------------------------------------------------------   
         void update_self(unsigned long elapsed) {
             if (not m_start) {
                 m_start = elapsed;
+            } else {
+                // Nothing to do
             }
 
             unsigned long now = elapsed - m_start;
@@ -119,6 +125,8 @@ class FrontEnd::Impl {
 
             if (now > m_duration) {
                 m_parent->finish();
+            } else {
+                // NOthing to do
             }
 
             Environment *env = Environment::get_instance();
@@ -129,7 +137,7 @@ class FrontEnd::Impl {
 
         // -------------------------------------------------------------  
         // Function: draw_self()  
-        // Description: Escrever aqui.
+        // Description: Clear and selfs draw the background.
         // Return: void
         // -------------------------------------------------------------   
         void draw_self() {
@@ -155,13 +163,13 @@ class FrontEnd::Impl {
 
 // -------------------------------------------------------------  
 // Function: FrontEnd()  
-// Description: Set the font size.
+// Description: Set the FrontEnd.
 // Parameters:
-//      const string& id;           Escrever aqui
-//      const string& next;         Escrever aqui  
-//      const string& texture;      Escrever aqui
-//      unsigned long duration;     Escrever aqui
-//      const Color& bg;            Escrever aqui
+//      const string& id;           I
+//      const string& next;         
+//      const string& texture;      
+//      unsigned long duration;     Duration of FrontEnd.
+//      const Color& bg;            Color of FrontEnd.
 // -------------------------------------------------------------   
 FrontEnd::FrontEnd(const string& id, const string& next, const string& texture,
                    unsigned long duration, const Color& bg)
@@ -173,7 +181,7 @@ FrontEnd::FrontEnd(const string& id, const string& next, const string& texture,
 
 // -------------------------------------------------------------  
 // Function: ~FrontEnd()  
-// Description: EScrever aqui.
+// Description: Destructor of FrontEnd.
 // -------------------------------------------------------------   
 FrontEnd::~FrontEnd() {
     Environment *env = Environment::get_instance();
@@ -182,7 +190,7 @@ FrontEnd::~FrontEnd() {
 
 // -------------------------------------------------------------  
 // Function: draw_self()  
-// Description: Escrever aqui.
+// Description: Selfs draw the FrontEnd.
 // -------------------------------------------------------------   
 void FrontEnd::draw_self() {
     m_impl->draw_self();
@@ -190,9 +198,9 @@ void FrontEnd::draw_self() {
 
 // -------------------------------------------------------------  
 // Function: update_self()  
-// Description: Escrever aqui.
+// Description: 
 // Parameters:
-//      unsigned long elapsed;     Escrever aqui
+//      unsigned long elapsed;     
 // -------------------------------------------------------------   
 void FrontEnd::update_self(unsigned long elapsed) {
     m_impl->update_self(elapsed);
@@ -200,9 +208,11 @@ void FrontEnd::update_self(unsigned long elapsed) {
 
 // -------------------------------------------------------------  
 // Function: on_event()  
-// Description: Escrever aqui.
+// Description: Return a event in the impl according to the 
+//              action on mouse button.
 // Parameters:
-//      const MouseButtonEvent& event;     Escrever aqui
+//      const MouseButtonEvent& event;     Mouse button related 
+//                                         event.
 // Return: m_impl->on_event
 // -------------------------------------------------------------   
 bool FrontEnd::on_event(const MouseButtonEvent& event) {
@@ -211,9 +221,10 @@ bool FrontEnd::on_event(const MouseButtonEvent& event) {
 
 // -------------------------------------------------------------  
 // Function: on_event()  
-// Description: Escrever aqui.
+// Description: Return a event in the impl according to the 
+//              action on JoyStick.
 // Parameters:
-//      const JoyStickEvent& event;     Escrever aqui
+//      const JoyStickEvent& event;     JOyStick related event.
 // Return: m_impl->on_event
 // -------------------------------------------------------------   
 bool FrontEnd::on_event(const JoyStickEvent& event) {
@@ -221,10 +232,11 @@ bool FrontEnd::on_event(const JoyStickEvent& event) {
 }
 
 // -------------------------------------------------------------  
-// Function: set_size()  
-// Description: Escrever aqui.
+// Function: on_event()  
+// Description: Return a event in the impl according to the 
+//              action on keyboard.
 // Parameters:
-//      const KeyboardEvent& event;     Escrever aqui
+//      const KeyboardEvent& event;     Keyboard related event.
 // Return: m_impl->on_event
 // -------------------------------------------------------------   
 bool FrontEnd::on_event(const KeyboardEvent& event) {
