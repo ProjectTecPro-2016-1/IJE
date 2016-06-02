@@ -51,6 +51,8 @@ class FrontEnd::Impl {
             if (event.state() == MouseButtonEvent::PRESSED) {
                 m_parent->finish();
                 return true;
+            } else {
+                // Nothing to do
             }
 
             return false;
