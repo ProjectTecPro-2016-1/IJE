@@ -114,23 +114,22 @@ class Font::Impl {
         // Return: void
         // -------------------------------------------------------------   
         void change_size(int size) {
-            if (m_size == size) {
-                return;
+            if (m_size != size) {
+                TTF_Font *font = TTF_OpenFont(m_path.c_str(), size);
+
+                if (font) {
+                    TTF_CloseFont(m_font);
+                    m_font = font;
+                    m_size = size;
+                } else {
+                    // Nothing to do
+                }
+
             } else {
                 // Nothing to do
             }
+            return;  
 
-            TTF_Font *font = TTF_OpenFont(m_path.c_str(), size);
-
-            if (not font) {
-                return;
-            } else {
-                // Nothing to do
-            }
-
-            TTF_CloseFont(m_font);
-            m_font = font;
-            m_size = size;
         }
 };
 
